@@ -1,5 +1,69 @@
 var ajaxitems = [];
 
+$("textarea[id^=mes_]").removeAttr('onkeyup');
+$("textarea[id^=mes_]").removeAttr('onchange');
+$("textarea[id^=mes_]").before("<span id='mes_filter'></span>");
+
+function strLength(str) {
+	var r = 0;
+	for (var i = 0; i < str.length; i++) {
+		var c = str.charCodeAt(i);
+		// Shift_JIS: 0x0 ～ 0x80, 0xa0 , 0xa1 ～ 0xdf , 0xfd ～ 0xff 
+		// Unicode : 0x0 ～ 0x80, 0xf8f0, 0xff61 ～ 0xff9f, 0xf8f1 ～ 0xf8f3 
+		if ((c >= 0x0 && c < 0x81) || (c == 0xf8f0) || (c >= 0xff61 && c < 0xffa0) || (c >= 0xf8f1 && c < 0xf8f4)) {
+			r += 1;
+		} else {
+			r += 2;
+		}
+	}
+	return r;
+}
+
+function showLength(id, str) {
+	var strCount = strLength(str);
+	var ptcnt = 0;
+	var linecount = str.split("\n");
+	var linemes = "";
+
+	if (strCount <= 50) {
+		ptcnt = 20;
+	} else {
+		ptcnt = Math.floor(((strCount - 50) / 14) + 20);
+	}
+	if (strCount === 0) {
+		ptcnt = 0;
+	}
+	if (linecount.length > 30) {
+		linemes = "<small><font color=\"red\">※行数オーバーです。（MAX30行\/現在" + linecount.length + "行）</font></small>";
+	} else {
+		linemes = "";
+	}
+
+	var ptmax = 2000;
+	var ptover = "";
+	if (strCount > ptmax) {
+		ptover = "<small><font color=\"red\">※一発言分の文字数をオーバーしています</font></small> ";
+	} else {
+		ptover = "";
+	}
+
+	if ((ptover != "") && (linemes != ""))
+		$(id).prev("#mes_filter").html(ptover + "<br>" + linemes);
+	else if ((ptover != "") && (linemes == ""))
+		$(id).prev("#mes_filter").html(ptover);
+	else if ((ptover == "") && (linemes != ""))
+		$(id).prev("#mes_filter").html(linemes);
+	else
+		$(id).prev("#mes_filter").html("");
+
+	$("span[id^=txt_mes_]").text(ptcnt + "pt");
+	$(id).parent(".msg").find("span[id^=txt_mes_]").text(ptcnt + "pt");
+}
+
+$("textarea[id^=mes_]").on('keyup mouseup change', function (e) {
+	showLength($(this), $(this).val());
+});
+
 $(document).on('click', '.close', function (e) {
 	var ank = $(this);
 	var base = ank.parents(".ajax");
@@ -12,9 +76,6 @@ $(document).on('click', '.close', function (e) {
 $(document).on('click', '.res_anchor', function (e) {
 	e.preventDefault();
 	var ank = $(this);
-	//var mesrole = ".mes_nom,.mes_wolf,.mes_grave,.mes_think,.mes_dragon,.mes_love,.mes_mob";
-	//var mesnom = ank.parents(mesrole);
-	//var base = mesnom.parent();
 	var base = ank.parents("table[class^='mes_']").parent();
 	var basenext = base.next("div");
 	var text = ank.text();
@@ -25,11 +86,8 @@ $(document).on('click', '.res_anchor', function (e) {
 		var href = this.href.replace("#", "&l=").replace("&move=page", "").replace("mv=p", "").replace("&ra=on", "").replace(/\&r=\d+/, "").replace(/\&puname=\d+/, "");
 		href = href + "&r=1";
 		$.get(href, {}, function (data) {
-			//var date = $(data).find(mesrole);
-			//var mes = date.parent("div");
 			var date = $(data).find(".mes_date");
 			var mes = date.parents("table[class^='mes']").parent("div");
-			//mes.css('width', $(mesrole).width());
 			mes.css('width', $("table[class^='mes']").width());	
 			var handlerId = "handler" + (new Date().getTime());
 			var handler = $("<div id=\"" + handlerId + "\"></div>").addClass("handler");
