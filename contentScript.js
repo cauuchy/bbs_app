@@ -12,9 +12,7 @@ $(document).on('click', '.close', function (e) {
 $(document).on('click', '.res_anchor', function (e) {
 	e.preventDefault();
 	var ank = $(this);
-	var mesrole = ".mes_nom,.mes_wolf,.mes_grave,.mes_think,.mes_dragon,.mes_love,.mes_mob";
-	var mesnom = ank.parents(mesrole);
-	var base = mesnom.parent();
+	var base = ank.parents("table[class^='mes_']").parent();
 	var basenext = base.next("div");
 	var text = ank.text();
 	var htmltext = ank.children('img').attr('src');
@@ -24,9 +22,9 @@ $(document).on('click', '.res_anchor', function (e) {
 		var href = this.href.replace("#", "&l=").replace("&move=page", "").replace("mv=p", "").replace("&ra=on", "").replace(/\&r=\d+/, "").replace(/\&puname=\d+/, "");
 		href = href + "&r=1";
 		$.get(href, {}, function (data) {
-			var date = $(data).find(mesrole);
-			var mes = date.parent("div");
-			mes.css('width', $(mesrole).width());	
+			var date = $(data).find(".mes_date");
+			var mes = date.parents("table[class^='mes']").parent("div");
+			mes.css('width', $("table[class^='mes']").width());	
 			var handlerId = "handler" + (new Date().getTime());
 			var handler = $("<div id=\"" + handlerId + "\"></div>").addClass("handler");
 			var close = $("<span>[close]</span>");
