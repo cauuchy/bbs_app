@@ -1,7 +1,7 @@
 {
   "name": "三日月国 拡張ツール",
   "version": "1.0",
-  "description": "三日月国のアンカをポップアップさせるツール",
+  "description": "三日月国を便利にします",
   "browser_action": {
       "default_icon": {
           "16": "images/moon16.png",
