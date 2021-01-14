@@ -1,0 +1,25 @@
+{
+  "name": "三日月国 拡張ツール",
+  "version": "1.0",
+  "description": "三日月国のアンカをポップアップさせるツール",
+  "browser_action": {
+      "default_icon": {
+          "16": "images/moon16.png",
+          "32": "images/moon32.png",
+          "48": "images/moon48.png",
+          "128": "images/moon128.png"
+      }
+  },
+  "icons": {
+      "16": "images/moon16.png",
+      "32": "images/moon32.png",
+      "48": "images/moon48.png",
+      "128": "images/moon128.png"
+  },
+  "permissions": ["activeTab"],
+  "content_scripts": [{
+    "matches": ["http://www.moonpupa.jp/*"],
+    "js": ["jquery-3.4.1.min.js", "jquery.easydrag.js", "contentScript.js"]
+  }],
+  "manifest_version": 2
+}
