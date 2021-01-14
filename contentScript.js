@@ -15,15 +15,7 @@ $(document).on('click', '.res_anchor', function (e) {
 	var mesrole = ".mes_nom,.mes_wolf,.mes_grave,.mes_think,.mes_dragon,.mes_love,.mes_mob";
 	var mesnom = ank.parents(mesrole);
 	var base = mesnom.parent();
-
-	if (base.next("div").hasClass("ajax")) {
-		var base = base.next("div");
-		base.fadeOut("nomal", function () {
-			base.remove();
-		});
-		return false;
-	}
-
+	var basenext = base.next("div");
 	var text = ank.text();
 	var htmltext = ank.children('img').attr('src');
 	var title = ank.attr("title");
@@ -41,6 +33,17 @@ $(document).on('click', '.res_anchor', function (e) {
 			close.addClass("close").css({ "font-size": "80%", "margin": "5px 5px 5px 5px", "cursor": "pointer", "float": "right" });
 			var name = $(mes).find(".mesname,.action,.memoright");
 			mes.addClass("ajax").css('display', 'none').css('position', 'absolute');
+
+			var text1 = basenext.find(".mes_text").text();
+			var text2 = mes.find(".mes_text").text();
+
+			if (text1 == text2) {
+				var re = basenext;
+				re.fadeOut("nomal", function () {
+					re.remove();
+				});
+				return false;
+			}
 			
 			var handlerId = "handler" + (new Date().getTime());
 			var handler = $("<div id=\"" + handlerId + "\"></div>").css({"background": "#424A76", "height": "15px", "opacity": "0.7", "margin": "0px 10px"});
