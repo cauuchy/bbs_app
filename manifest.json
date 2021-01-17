@@ -1,6 +1,6 @@
 {
   "name": "三日月国・瓜科国 拡張ツール",
-  "version": "2.0",
+  "version": "2.1",
   "description": "三日月国と瓜科国を便利にします",
   "browser_action": {
       "default_icon": {
@@ -8,7 +8,14 @@
           "32": "images/moon32.png",
           "48": "images/moon48.png",
           "128": "images/moon128.png"
-      }
+      },
+      "default_popup": "popup.html"
+  },
+  "background": {
+      "scripts": [
+        "js/background.js"
+      ],
+      "persistent": false
   },
   "icons": {
       "16": "images/moon16.png",
@@ -19,7 +26,7 @@
   "permissions": ["activeTab"],
   "content_scripts": [{
     "matches": ["http://www.moonpupa.jp/*", "http://melon-cirrus.sakura.ne.jp/*"],
-    "js": ["jquery-3.4.1.min.js", "jquery.easydrag.js", "contentScript.js"]
+    "js": ["js/jquery-3.4.1.min.js", "js/jquery.easydrag.js", "js/contentScript.js"]
   }],
   "manifest_version": 2
 }

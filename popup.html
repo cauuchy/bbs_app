@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<script src="js/jquery-3.4.1.min.js"></script>
+	<script src="js/popup.js"></script>
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
+	<link type="text/css" rel="stylesheet" href="css/popup.css">
+</head>
+<body>
+	<div class="settings container-fluid">
+		<h2>設定</h2>
+		<h3>三日月国</h3>
+		<ul>
+			<li>
+				<label class="item_name">発言制限: </label>
+				<select class="say form-control" id="say_moon" name="say_moon">
+					<option value="mokugeki">黙劇</option>
+					<option value="kamoku">寡黙</option>
+					<option value="nokin">脳筋</option>
+					<option value="sisso">質素</option>
+					<option value="monogatari" selected>物語</option>
+					<option value="sinmon">審問</option>
+					<option value="taben">多弁</option>
+					<option value="netsuben">熱弁</option>
+					<option value="itigeki">一撃</option>
+					<option value="kechi">ケチ</option>
+					<option value="setsuyaku">節約</option>
+					<option value="bbs_kyu">BBS旧式</option>
+					<option value="bbs_plus">BBS+</option>
+					<option value="bbs">BBS</option>
+					<option value="jiyu">自由</option>
+				</select>
+			</li>
+			<div id="free_settings" style="display: none;">
+				<li>
+					<label class="item_name">バイト: </label>
+					<input id="bytes_moon" class="num form-control" type="number" name="example" min="100" max="1500" value="750">
+				</li>
+				<li>
+					<label class="item_name">行数: </label>
+					<input id="lines_moon" type="range" value="10" min="1" max="30" step="1">
+					<output id="output_moon">10</output>
+				</li>
+			</div>
+		</ul>
+		<h3>瓜科国</h3>
+		<ul>
+			<li>
+				<label class="item_name">発言制限: </label>
+				<select class="say form-control" id="say_melon" name="say_melon">
+					<option value="monogatari" selected>物語</option>
+					<option value="sinmon">審問</option>
+					<option value="taben">多弁</option>
+					<option value="sodatusen">飴争奪戦</option>
+					<option value="tinmoku">狼達の沈黙</option>
+					<option value="bbs">BBS</option>
+					<option value="bbs_kakucho">BBS拡張</option>
+					<option value="setsuyaku">節約</option>
+					<option value="hakogata">箱型</option>
+					<option value="oshu">欧州</option>
+				</select>
+			</li>
+			<!--
+			<li>
+				<label class="item_name">バイト: </label>
+				<input id="bytes_melon" class="num form-control" type="number" name="example" min="200" max="1000" value="750">
+			</li>
+			<li>
+				<label class="item_name">行数: </label>
+				<input id="lines_melon" type="range" value="20" min="5" max="20" step="1">
+				<output id="output_melon">20</output>
+			</li>
+			-->
+		</ul>
+	</div>
+</body>
+</html>
