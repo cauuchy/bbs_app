@@ -1,6 +1,6 @@
 {
   "name": "三日月国・瓜科国 拡張ツール",
-  "version": "2.1",
+  "version": "3.0",
   "description": "三日月国と瓜科国を便利にします",
   "browser_action": {
       "default_icon": {
