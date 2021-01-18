@@ -7,7 +7,7 @@ BBS人狼・月狼国風にアンカをポップアップさせたり，文字�
 
 <chrome://extensions/>
 
-に移動し, (クリックで移動できない場合はURLに直接貼り付けてください）
+に移動し, (URLに直接貼り付けてください）
 
 「デベロッパーモード」のスライダーをクリックして，ONにしてください。
 
@@ -32,5 +32,5 @@ Chrome右上の拡張機能ボタンをクリックし、「三日月国・瓜�
 
 （アプリの軽量化・サーバーへの負担から自動で発言制限を取得することを断念しています）
 
-<a href="http://managarmr.sakura.ne.jp/" target="_blank">http://managarmr.sakura.ne.jp/</a>
+月狼国： <a href="http://managarmr.sakura.ne.jp/" target="_blank">http://managarmr.sakura.ne.jp/</a>
 
