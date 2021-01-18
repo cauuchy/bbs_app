@@ -5,13 +5,13 @@ BBS人狼・月狼国風にアンカをポップアップさせたり，文字�
 
 このアプリをChrome上で動作させるには，デベロッパーモードをONにする必要があります。
 
-[link]("chrome://extensions/"){:target="_blank"}
+<a href="chrome://extensions/" target="_blank">chrome://extensions/</a>
 
 に移動し, (クリックで移動できない場合はURLに直接貼り付けてください）
 
 「デベロッパーモード」のスライダーをクリックして，ONにしてください。
 
-<img src="https://imgur.com/c18b7853-dcb7-4412-a4e8-6f75be20973e" width="300">
+<img src="https://i.imgur.com/k6nuP9s.png" width="300">
 
 そうすると，上の画像のように「パッケージ化されていない拡張機能を読み込む」というボタンが出てくるのでボタンを押し，ZIPファイルを展開したフォルダを指定してください。
 
@@ -32,4 +32,5 @@ Chrome右上の拡張機能ボタンをクリックし、「三日月国・瓜�
 
 （アプリの軽量化・サーバーへの負担から自動で発言制限を取得することを断念しています）
 
-月狼国： [link]("http://managarmr.sakura.ne.jp/"){:target="_blank"}
+<a href="http://managarmr.sakura.ne.jp/" target="_blank">http://managarmr.sakura.ne.jp/</a>
+
