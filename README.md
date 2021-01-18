@@ -16,11 +16,11 @@ BBS人狼・月狼国風にアンカをポップアップさせたり，文字�
 
 Chrome右上の拡張機能ボタンをクリックし、「三日月国・瓜科国 拡張ツール」を選択して
 
-![chrome拡張](https://i.imgur.com/KFltDsz.png)
+<img src="https://i.imgur.com/KFltDsz.png" width="300">
 
 入村している村の発言制限を選んでください。
 
-![ポップアップ](https://imgur.com/a/rd9L1cQ)
+<img src="https://imgur.com/a/rd9L1cQ.png" width="300">
 
 （アプリの軽量化・サーバーへの負担から自動で発言制限を取得することを断念しています）
 
