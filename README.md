@@ -32,5 +32,5 @@ Chrome右上の拡張機能ボタンをクリックし、「三日月国・瓜�
 
 （アプリの軽量化・サーバーへの負担から自動で発言制限を取得することを断念しています）
 
-月狼国： <a href="http://managarmr.sakura.ne.jp/" target="_blank">http://managarmr.sakura.ne.jp/</a>
+Special Thanks By 月狼国： <a href="http://managarmr.sakura.ne.jp/" target="_blank">http://managarmr.sakura.ne.jp/</a>
 
