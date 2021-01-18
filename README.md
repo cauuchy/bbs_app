@@ -16,7 +16,7 @@ BBS人狼・月狼国風にアンカをポップアップさせたり，文字�
 
 Chrome右上の拡張機能ボタンをクリックし、「三日月国・瓜科国 拡張ツール」を選択して
 
-![chrome拡張](https://imgur.com/a/PZYV8wc)
+![chrome拡張](https://i.imgur.com/KFltDsz.png)
 
 入村している村の発言制限を選んでください。
 
