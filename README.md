@@ -20,7 +20,7 @@ Chrome右上の拡張機能ボタンをクリックし、「三日月国・瓜�
 
 入村している村の発言制限を選んでください。
 
-<img src="https://imgur.com/a/rd9L1cQ.png" width="300">
+<img src="https://i.imgur.com/a/rd9L1cQ.png" width="300">
 
 （アプリの軽量化・サーバーへの負担から自動で発言制限を取得することを断念しています）
 
