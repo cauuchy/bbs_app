@@ -263,6 +263,9 @@ function moonpupa(){
 				$(mes).easydrag();
 				$(mes).setHandler(handlerId);
 			});
+		} else {
+			window.open(this.href, '_blank');
+			return false;
 		}
 	});
 }
