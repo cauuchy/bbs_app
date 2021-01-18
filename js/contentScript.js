@@ -182,11 +182,15 @@ function moonpupa(){
 
 	//$("textarea[id^=mes_]").removeAttr('onkeyup');
 	//$("textarea[id^=mes_]").removeAttr('onchange');
-	$("textarea[id^=mes_]").before("<span id='mes_filter'></span>");
 
-	$("textarea[id^=mes_]").on('keyup mouseup change', function (e) {
-		showLength($(this), $(this).val());
-	});
+		$("textarea[id^=mes_]").before("<span id='mes_filter'></span>");
+
+		$("textarea[id^=mes_]").on('keyup mouseup change', function (e) {
+			if(settings.counter)
+				showLength($(this), $(this).val());
+			else
+				$("#mes_filter").html("");
+		});
 
 	$(document).on('click', '.close', function (e) {
 		var ank = $(this);
@@ -198,79 +202,83 @@ function moonpupa(){
 	});
 
 	$(document).on('click', '.res_anchor', function (e) {
-		e.preventDefault();
-		var ank = $(this);
-		var base = ank.parents("table[class^='mes_']").parent();
-		var basenext = base.next("div");
-		var text = ank.text();
-		var htmltext = ank.children('img').attr('src');
-		var title = ank.attr("title");
-		var timeid = parseInt(new Date().getTime() / 1000);
-		if ((0 === text.indexOf(">>")) || (htmltext === "img/memo.png")) {
-			var href = this.href.replace("#", "&l=").replace("&move=page", "").replace("mv=p", "").replace("&ra=on", "").replace(/\&r=\d+/, "").replace(/\&puname=\d+/, "");
-			href = href + "&r=1";
-			$.get(href, {}, function (data) {
-				var date = $(data).find(".mes_date");
-				var mes = date.parents("table[class^='mes']").parent("div");
-				mes.css('width', $("table[class^='mes']").width());
-				var handlerId = "handler" + (new Date().getTime());
-				var handler = $("<div id=\"" + handlerId + "\"></div>").addClass("handler");
-				var close = $("<span>[close]</span>");
-				close.addClass("close").css({ "font-size": "80%", "margin": "5px 5px 5px 5px", "cursor": "pointer", "float": "right" });
-				var name = $(mes).find(".mesname,.action");
-				mes.addClass("ajax").css('display', 'none').css('position', 'absolute');
+		if(settings.anchor){
+			e.preventDefault();
+			var ank = $(this);
+			var base = ank.parents("table[class^='mes_']").parent();
+			var basenext = base.next("div");
+			var text = ank.text();
+			var htmltext = ank.children('img').attr('src');
+			var title = ank.attr("title");
+			var timeid = parseInt(new Date().getTime() / 1000);
+			if ((0 === text.indexOf(">>")) || (htmltext === "img/memo.png")) {
+				var href = this.href.replace("#", "&l=").replace("&move=page", "").replace("mv=p", "").replace("&ra=on", "").replace(/\&r=\d+/, "").replace(/\&puname=\d+/, "");
+				href = href + "&r=1";
+				$.get(href, {}, function (data) {
+					var date = $(data).find(".mes_date");
+					var mes = date.parents("table[class^='mes']").parent("div");
+					mes.css('width', $("table[class^='mes']").width());
+					var handlerId = "handler" + (new Date().getTime());
+					var handler = $("<div id=\"" + handlerId + "\"></div>").addClass("handler");
+					var close = $("<span>[close]</span>");
+					close.addClass("close").css({ "font-size": "80%", "margin": "5px 5px 5px 5px", "cursor": "pointer", "float": "right" });
+					var name = $(mes).find(".mesname,.action");
+					mes.addClass("ajax").css('display', 'none').css('position', 'absolute');
 
-				var text1 = basenext.find(".mes_text,.action").text().split("[close]")[0];
-				var text2 = mes.find(".mes_text,.action").text().split("[close]")[0];
+					var text1 = basenext.find(".mes_text,.action").text().split("[close]")[0];
+					var text2 = mes.find(".mes_text,.action").text().split("[close]")[0];
 
-				if (text1 == text2) {
-					var re = basenext;
-					re.fadeOut("nomal", function () {
-						re.remove();
-					});
-					return false;
-				}
+					if (text1 == text2) {
+						var re = basenext;
+						re.fadeOut("nomal", function () {
+							re.remove();
+						});
+						return false;
+					}
 
-				var handlerId = "handler" + (new Date().getTime());
-				var handler = $("<div id=\"" + handlerId + "\"></div>").css({ "background": "#424A76", "height": "15px", "opacity": "0.7", "margin": "0px 10px" });
-				$(mes).clone(true).css('display', 'none').addClass("origin").insertAfter($(mes));
-				$(mes).addClass("drag");
-				$(mes).prepend(handler);
-				$(mes).easydrag();
-				$(mes).setHandler(handlerId);
+					var handlerId = "handler" + (new Date().getTime());
+					var handler = $("<div id=\"" + handlerId + "\"></div>").css({ "background": "#424A76", "height": "15px", "opacity": "0.7", "margin": "0px 10px" });
+					$(mes).clone(true).css('display', 'none').addClass("origin").insertAfter($(mes));
+					$(mes).addClass("drag");
+					$(mes).prepend(handler);
+					$(mes).easydrag();
+					$(mes).setHandler(handlerId);
 
-				name.append(close);
-				base.after(mes);
-				$(mes).prepend(handler);
-				ajaxitems.push(mes);
-				var topm = e.pageY + 16;
-				var leftm = e.pageX;
-				var leftend = $(document).width() - mes.width() - 8;
+					name.append(close);
+					base.after(mes);
+					$(mes).prepend(handler);
+					ajaxitems.push(mes);
+					var topm = e.pageY + 16;
+					var leftm = e.pageX;
+					var leftend = $(document).width() - mes.width() - 8;
 
-				if (leftend < leftm) {
-					leftm = leftend;
+					if (leftend < leftm) {
+						leftm = leftend;
 
-				}
-				mes.css({ top: topm, left: leftm, zIndex: (timeid) });
-				$(mes).fadeIn();
-				$(mes).easydrag();
-				$(mes).setHandler(handlerId);
-			});
-		} else {
-			window.open(this.href, '_blank');
-			return false;
+					}
+					mes.css({ top: topm, left: leftm, zIndex: (timeid) });
+					$(mes).fadeIn();
+					$(mes).easydrag();
+					$(mes).setHandler(handlerId);
+				});
+			} else {
+				window.open(this.href, '_blank');
+				return false;
+			}
 		}
 	});
 }
 
 function melon() {
 
-	$("textarea[id^=mes]").before("<div id='mes_filter'></span>");
-	$("textarea[id^=mes]").parent("div").append("<span id='pt_count' style='background-color:#fff;color:#000;padding:1px 2px;'>0pt消費</span>");
+	if (settings.counter) {
+		$("textarea[id^=mes]").before("<div id='mes_filter'></span>");
+		$("textarea[id^=mes]").parent("div").append("<span id='pt_count' style='background-color:#fff;color:#000;padding:1px 2px;'>0pt消費</span>");
 
-	$("textarea[id^=mes]").on('keyup mouseup change', function (e) {
-		showLength_mln($(this), $(this).val());
-	});
+		$("textarea[id^=mes]").on('keyup mouseup change', function (e) {
+			showLength_mln($(this), $(this).val());
+		});
+	}
 
 	$(document).on('click', '.close', function (e) {
 		var ank = $(this);
@@ -282,64 +290,66 @@ function melon() {
 	});
 
 	$(document).on('click', '.res_anchor', function (e) {
-		e.preventDefault();
-		var ank = $(this);
-		var base = ank.parents("div[id^='mestype']");
-		var basenext = base.next("div");
-		var text = ank.text();
-		var htmltext = ank.children('img').attr('src');
-		var title = ank.attr("title");
-		var timeid = parseInt(new Date().getTime() / 1000);
-		if ((0 === text.indexOf(">>")) || (htmltext === "img/memo.png")) {
-			var href = this.href.replace("#", "&l=").replace("&move=page", "").replace("mv=p", "").replace("&ra=on", "").replace(/\&r=\d+/, "").replace(/\&puname=\d+/, "");
-			href = href + "&r=1";
-			$.get(href, {}, function (data) {
-				var date = $(data).find(".mes_date");
-				var mes = date.parents("div[id^='mestype']");
-				mes.css('width', $("div[id^='mestype']").width());
-				var handlerId = "handler" + (new Date().getTime());
-				var handler = $("<div id=\"" + handlerId + "\"></div>").addClass("handler");
-				var close = $("<span>[close]</span>");
-				close.addClass("close").css({ "font-size": "80%", "margin": "5px 5px 5px 5px", "cursor": "pointer", "float": "right" });
-				var name = $(mes).find(".mesname,.action_txt");
-				mes.addClass("ajax").css('display', 'none').css('position', 'absolute');
+		if (settings.anchor) {
+			e.preventDefault();
+			var ank = $(this);
+			var base = ank.parents("div[id^='mestype']");
+			var basenext = base.next("div");
+			var text = ank.text();
+			var htmltext = ank.children('img').attr('src');
+			var title = ank.attr("title");
+			var timeid = parseInt(new Date().getTime() / 1000);
+			if ((0 === text.indexOf(">>")) || (htmltext === "img/memo.png")) {
+				var href = this.href.replace("#", "&l=").replace("&move=page", "").replace("mv=p", "").replace("&ra=on", "").replace(/\&r=\d+/, "").replace(/\&puname=\d+/, "");
+				href = href + "&r=1";
+				$.get(href, {}, function (data) {
+					var date = $(data).find(".mes_date");
+					var mes = date.parents("div[id^='mestype']");
+					mes.css('width', $("div[id^='mestype']").width());
+					var handlerId = "handler" + (new Date().getTime());
+					var handler = $("<div id=\"" + handlerId + "\"></div>").addClass("handler");
+					var close = $("<span>[close]</span>");
+					close.addClass("close").css({ "font-size": "80%", "margin": "5px 5px 5px 5px", "cursor": "pointer", "float": "right" });
+					var name = $(mes).find(".mesname,.action_txt");
+					mes.addClass("ajax").css('display', 'none').css('position', 'absolute');
 
-				var text1 = basenext.find(".mes_text,.action_txt").text().split("[close]")[0];
-				var text2 = mes.find(".mes_text,.action_txt").text().split("[close]")[0];
+					var text1 = basenext.find(".mes_text,.action_txt").text().split("[close]")[0];
+					var text2 = mes.find(".mes_text,.action_txt").text().split("[close]")[0];
 
-				if (text1 == text2) {
-					var re = basenext;
-					re.fadeOut("nomal", function () {
-						re.remove();
-					});
-					return false;
-				}
+					if (text1 == text2) {
+						var re = basenext;
+						re.fadeOut("nomal", function () {
+							re.remove();
+						});
+						return false;
+					}
 
-				var handlerId = "handler" + (new Date().getTime());
-				var handler = $("<div id=\"" + handlerId + "\"></div>").css({ "background": "#424A76", "height": "15px", "opacity": "0.7", "margin": "0px 10px" });
-				$(mes).clone(true).css('display', 'none').addClass("origin").insertAfter($(mes));
-				$(mes).addClass("drag");
-				$(mes).prepend(handler);
-				$(mes).easydrag();
-				$(mes).setHandler(handlerId);
+					var handlerId = "handler" + (new Date().getTime());
+					var handler = $("<div id=\"" + handlerId + "\"></div>").css({ "background": "#424A76", "height": "15px", "opacity": "0.7", "margin": "0px 10px" });
+					$(mes).clone(true).css('display', 'none').addClass("origin").insertAfter($(mes));
+					$(mes).addClass("drag");
+					$(mes).prepend(handler);
+					$(mes).easydrag();
+					$(mes).setHandler(handlerId);
 
-				name.append(close);
-				base.after(mes);
-				$(mes).prepend(handler);
-				ajaxitems.push(mes);
-				var topm = e.pageY + 16;
-				var leftm = e.pageX;
-				var leftend = $(document).width() - mes.width() - 8;
+					name.append(close);
+					base.after(mes);
+					$(mes).prepend(handler);
+					ajaxitems.push(mes);
+					var topm = e.pageY + 16;
+					var leftm = e.pageX;
+					var leftend = $(document).width() - mes.width() - 8;
 
-				if (leftend < leftm) {
-					leftm = leftend;
+					if (leftend < leftm) {
+						leftm = leftend;
 
-				}
-				mes.css({ top: topm, left: leftm, zIndex: (timeid) });
-				$(mes).fadeIn();
-				$(mes).easydrag();
-				$(mes).setHandler(handlerId);
-			});
+					}
+					mes.css({ top: topm, left: leftm, zIndex: (timeid) });
+					$(mes).fadeIn();
+					$(mes).easydrag();
+					$(mes).setHandler(handlerId);
+				});
+			}
 		}
 	});
 
@@ -349,6 +359,5 @@ if (location.host == "www.moonpupa.jp") {
 	moonpupa();
 }
 else if (location.host == "melon-cirrus.sakura.ne.jp"){
-	chrome.runtime.sendMessage({ type: 'HELLO', value: { contents: 'aaa' } });
 	melon();
 }

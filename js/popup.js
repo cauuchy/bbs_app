@@ -20,6 +20,8 @@ function sendMessage(type, data, tabId = null) {
 }
 
 function onGotSettings() {
+	$('#anchor').bootstrapToggle(settings.anchor ? 'on' : 'off');
+	$('#counter').bootstrapToggle(settings.counter ? 'on' : 'off');
 	$('#say_moon').val(settings.moon);
 	$('#bytes_moon').val(settings.moon_bytes);
 	$('#lines_moon').val(settings.moon_lines);
@@ -68,6 +70,9 @@ $(document).ready(() => {
 		}
 	});
 
+	document.getElementById('anchor').onchange = onAnchorChange;
+	document.getElementById('counter').onchange = onCounterChange;
+
 	document.getElementById('say_moon').onchange = moon;
 	document.getElementById('say_melon').onchange = melon;
 
@@ -78,6 +83,16 @@ $(document).ready(() => {
 
 	sendMessage('GET_SETTINGS');
 });
+
+function onAnchorChange() {
+	settings.anchor = $('#anchor').prop('checked');
+	sendMessage('UPDATE_SETTINGS', settings);
+}
+
+function onCounterChange() {
+	settings.counter = $('#counter').prop('checked');
+	sendMessage('UPDATE_SETTINGS', settings);
+}
 
 function moon() {
 	settings.moon = this.value;
