@@ -1,13 +1,6 @@
 var ajaxitems = [];
 
-let settings = {
-	moon: 'monogatari',
-	moon_bytes: 750,
-	moon_lines: 10,
-	melon: 'monogatari',
-	//melon_bytes: 1000,
-	//melon_lines: 20
-};
+let settings = null;
 
 chrome.runtime.sendMessage({ type: 'HELLO' });
 

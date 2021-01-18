@@ -46,8 +46,8 @@ function loadSettings() {
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 	switch (request.type) {
 		case 'HELLO':
-			saveSettings();
 			loadSettings();
+			if(!settings) { saveSettings(); loadSettings(); }
 			sendMessage('THANKS', settings);
 			break;
 		case 'GET_SETTINGS':
