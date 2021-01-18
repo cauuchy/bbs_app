@@ -5,7 +5,7 @@ BBS人狼・月狼国風にアンカをポップアップさせたり，文字�
 
 このアプリをChrome上で動作させるには，デベロッパーモードをONにする必要があります。
 
-<a href="chrome://extensions/" target="_blank">chrome://extensions/</a>
+<chrome://extensions/>
 
 に移動し, (クリックで移動できない場合はURLに直接貼り付けてください）
 
