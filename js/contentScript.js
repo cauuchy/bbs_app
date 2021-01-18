@@ -1,6 +1,15 @@
 var ajaxitems = [];
 
-let settings = null;
+let settings = {
+	anchor: true,
+	counter: true,
+	moon: 'monogatari',
+	moon_bytes: 750,
+	moon_lines: 10,
+	melon: 'monogatari',
+	//melon_bytes: 1000,
+	//melon_lines: 20
+};
 
 chrome.runtime.sendMessage({ type: 'HELLO' });
 
@@ -271,14 +280,15 @@ function moonpupa(){
 
 function melon() {
 
-	if (settings.counter) {
+	if(settings.counter){
 		$("textarea[id^=mes]").before("<div id='mes_filter'></span>");
 		$("textarea[id^=mes]").parent("div").append("<span id='pt_count' style='background-color:#fff;color:#000;padding:1px 2px;'>0pt消費</span>");
-
-		$("textarea[id^=mes]").on('keyup mouseup change', function (e) {
-			showLength_mln($(this), $(this).val());
-		});
 	}
+
+	$("textarea[id^=mes]").on('keyup mouseup change', function (e) {
+		if (settings.counter)
+			showLength_mln($(this), $(this).val());
+	});
 
 	$(document).on('click', '.close', function (e) {
 		var ank = $(this);
@@ -359,5 +369,6 @@ if (location.host == "www.moonpupa.jp") {
 	moonpupa();
 }
 else if (location.host == "melon-cirrus.sakura.ne.jp"){
+	console.log('aaa');
 	melon();
 }
